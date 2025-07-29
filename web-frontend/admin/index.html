@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản Trị Jobjet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/heroicons/2.0.18/24/outline/hero-icons.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-link:hover {
+            background-color: #3b82f6; /* bg-blue-600 */
+            color: white;
+        }
+        .sidebar-link-active {
+            background-color: #2563eb; /* bg-blue-700 */
+            color: white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-200">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gray-800 text-white flex-shrink-0">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold">Jobjet Admin</h1>
+            </div>
+            <nav class="mt-6">
+                <a href="#dashboard" class="sidebar-link sidebar-link-active flex items-center px-6 py-3 transition duration-200" onclick="showView('dashboard')">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    <span class="ml-4">Tổng Quan</span>
+                </a>
+                <a href="#users" class="sidebar-link flex items-center px-6 py-3 transition duration-200" onclick="showView('users')">
+                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197"/></svg>
+                    <span class="ml-4">Quản Lý Người Dùng</span>
+                </a>
+                <a href="#jobs" class="sidebar-link flex items-center px-6 py-3 transition duration-200" onclick="showView('jobs')">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <span class="ml-4">Quản Lý Việc Làm</span>
+                </a>
+                <a href="#companies" class="sidebar-link flex items-center px-6 py-3 transition duration-200" onclick="showView('companies')">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    <span class="ml-4">Quản Lý Công Ty</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="flex justify-between items-center p-6 bg-white border-b-2 border-gray-200">
+                <div class="flex items-center">
+                    <h2 class="text-xl font-semibold text-gray-700">Chào mừng trở lại, Admin!</h2>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                    </button>
+                    <div class="relative">
+                        <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                            <img class="h-8 w-8 rounded-full object-cover" src="https://placehold.co/100x100/e2e8f0/333333?text=A" alt="Admin Avatar">
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                <!-- Dashboard View -->
+                <div id="dashboard" class="view-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center">
+                                <div class="p-3 rounded-full bg-blue-500 bg-opacity-20">
+                                    <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197"/></svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm text-gray-600">Tổng Người Dùng</p>
+                                    <p class="text-2xl font-bold text-gray-800">1,250</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center">
+                                <div class="p-3 rounded-full bg-green-500 bg-opacity-20">
+                                    <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm text-gray-600">Tổng Việc Làm</p>
+                                    <p class="text-2xl font-bold text-gray-800">832</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                           <div class="flex items-center">
+                                <div class="p-3 rounded-full bg-yellow-500 bg-opacity-20">
+                                     <svg class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm text-gray-600">Công Ty</p>
+                                    <p class="text-2xl font-bold text-gray-800">150</p>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="bg-white p-6 rounded-lg shadow-md">
+                           <div class="flex items-center">
+                                <div class="p-3 rounded-full bg-red-500 bg-opacity-20">
+                                    <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm text-gray-600">Chờ Duyệt</p>
+                                    <p class="text-2xl font-bold text-gray-800">12</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users View -->
+                <div id="users" class="view-content hidden">
+                    <h3 class="text-gray-700 text-2xl font-semibold mb-4">Danh sách người dùng</h3>
+                    <div class="bg-white shadow-md rounded-lg overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-gray-800 text-white">
+                                <tr>
+                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Họ Tên</th>
+                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Vai trò</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                <!-- Sample User Row -->
+                                <tr>
+                                    <td class="w-1/3 text-left py-3 px-4">Nguyễn Văn An</td>
+                                    <td class="w-1/3 text-left py-3 px-4">nguyen.an@example.com</td>
+                                    <td class="text-left py-3 px-4"><span class="bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-xs">Người tìm việc</span></td>
+                                    <td class="text-left py-3 px-4">
+                                        <button class="text-blue-500 hover:text-blue-700">Xem</button>
+                                        <button class="text-red-500 hover:text-red-700 ml-2">Tạm khóa</button>
+                                    </td>
+                                </tr>
+                                 <tr class="bg-gray-100">
+                                    <td class="w-1/3 text-left py-3 px-4">Trần Thị Bích</td>
+                                    <td class="w-1/3 text-left py-3 px-4">bich.tran@company.com</td>
+                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Nhà tuyển dụng</span></td>
+                                    <td class="text-left py-3 px-4">
+                                        <button class="text-blue-500 hover:text-blue-700">Xem</button>
+                                        <button class="text-red-500 hover:text-red-700 ml-2">Tạm khóa</button>
+                                    </td>
+                                </tr>
+                                <!-- Add more user rows here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Jobs View -->
+                <div id="jobs" class="view-content hidden">
+                    <h3 class="text-gray-700 text-2xl font-semibold mb-4">Danh sách việc làm</h3>
+                     <div class="bg-white shadow-md rounded-lg overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-gray-800 text-white">
+                                <tr>
+                                    <th class="w-2/5 text-left py-3 px-4 uppercase font-semibold text-sm">Vị Trí</th>
+                                    <th class="w-2/5 text-left py-3 px-4 uppercase font-semibold text-sm">Công Ty</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Trạng Thái</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                <tr>
+                                    <td class="w-2/5 text-left py-3 px-4">Nhân viên kho Shopee Express</td>
+                                    <td class="w-2/5 text-left py-3 px-4">Shopee</td>
+                                    <td class="text-left py-3 px-4"><span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Đã duyệt</span></td>
+                                    <td class="text-left py-3 px-4">
+                                        <button class="text-blue-500 hover:text-blue-700">Xem</button>
+                                        <button class="text-red-500 hover:text-red-700 ml-2">Gỡ</button>
+                                    </td>
+                                </tr>
+                                <tr class="bg-gray-100">
+                                    <td class="w-2/5 text-left py-3 px-4">Phục vụ nhà hàng</td>
+                                    <td class="w-2/5 text-left py-3 px-4">Nhà hàng Sài Gòn</td>
+                                    <td class="text-left py-3 px-4"><span class="bg-yellow-200 text-yellow-800 py-1 px-3 rounded-full text-xs">Chờ duyệt</span></td>
+                                    <td class="text-left py-3 px-4">
+                                        <button class="text-green-500 hover:text-green-700">Duyệt</button>
+                                        <button class="text-red-500 hover:text-red-700 ml-2">Từ chối</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Companies View -->
+                 <div id="companies" class="view-content hidden">
+                    <h3 class="text-gray-700 text-2xl font-semibold mb-4">Danh sách công ty</h3>
+                     <div class="bg-white shadow-md rounded-lg overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-gray-800 text-white">
+                                <tr>
+                                    <th class="w-1/2 text-left py-3 px-4 uppercase font-semibold text-sm">Tên Công Ty</th>
+                                    <th class="w-1/2 text-left py-3 px-4 uppercase font-semibold text-sm">Email Liên Hệ</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Hành động</th>
+                                </tr>
+                            </thead>
+                             <tbody class="text-gray-700">
+                                <tr>
+                                    <td class="w-1/2 text-left py-3 px-4">Shopee Express Việt Nam</td>
+                                    <td class="w-1/2 text-left py-3 px-4">hr@shopee.vn</td>
+                                    <td class="text-left py-3 px-4">
+                                        <button class="text-blue-500 hover:text-blue-700">Xem chi tiết</button>
+                                    </td>
+                                </tr>
+                                <tr class="bg-gray-100">
+                                    <td class="w-1/2 text-left py-3 px-4">Circle K Việt Nam</td>
+                                    <td class="w-1/2 text-left py-3 px-4">tuyendung@circlek.com.vn</td>
+                                    <td class="text-left py-3 px-4">
+                                        <button class="text-blue-500 hover:text-blue-700">Xem chi tiết</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript để xử lý chuyển đổi giữa các view và active link
+        function showView(viewId) {
+            // Ẩn tất cả các view
+            document.querySelectorAll('.view-content').forEach(view => {
+                view.classList.add('hidden');
+            });
+
+            // Hiển thị view được chọn
+            const activeView = document.getElementById(viewId);
+            if (activeView) {
+                activeView.classList.remove('hidden');
+            }
+
+            // Cập nhật trạng thái active cho sidebar
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('sidebar-link-active');
+                if (link.getAttribute('href') === '#' + viewId) {
+                    link.classList.add('sidebar-link-active');
+                }
+            });
+
+            const API_BASE_URL = 'http://localhost:8080/api/admin'; // Thay đổi nếu cần
+
+        // Lấy dữ liệu người dùng
+        function fetchUsers() {
+            fetch(`${API_BASE_URL}/users`)
+                .then(response => response.json())
+                .then(users => {
+                    const userTableBody = document.querySelector('#users tbody');
+                    userTableBody.innerHTML = ''; // Xóa dữ liệu cũ
+                    users.forEach(user => {
+                        const row = `
+                            <tr>
+                                <td class="w-1/3 text-left py-3 px-4">${user.displayName}</td>
+                                <td class="w-1/3 text-left py-3 px-4">${user.email}</td>
+                                <td class="text-left py-3 px-4"><span class="bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-xs">${user.role}</span></td>
+                                <td class="text-left py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700">Xem</button>
+                                    <button class="text-red-500 hover:text-red-700 ml-2">Tạm khóa</button>
+                                </td>
+                            </tr>`;
+                        userTableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Lỗi khi tải danh sách người dùng:', error));
+        }
+
+        // Lấy dữ liệu việc làm
+        function fetchJobs() {
+            fetch(`${API_BASE_URL}/jobs`)
+                .then(response => response.json())
+                .then(jobs => {
+                     const jobTableBody = document.querySelector('#jobs tbody');
+                     jobTableBody.innerHTML = ''; // Xóa dữ liệu cũ
+                     jobs.forEach(job => {
+                        const statusClass = job.status === 'Đã duyệt' ? 'bg-green-200 text-green-800' : 'bg-yellow-200 text-yellow-800';
+                        const row = `
+                            <tr>
+                                <td class="w-2/5 text-left py-3 px-4">${job.title}</td>
+                                <td class="w-2/5 text-left py-3 px-4">${job.company}</td>
+                                <td class="text-left py-3 px-4"><span class="${statusClass} py-1 px-3 rounded-full text-xs">${job.status}</span></td>
+                                <td class="text-left py-3 px-4">
+                                     <button class="text-blue-500 hover:text-blue-700">Xem</button>
+                                     <button class="text-red-500 hover:text-red-700 ml-2">Gỡ</button>
+                                 </td>
+                            </tr>`;
+                        jobTableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Lỗi khi tải danh sách việc làm:', error));
+        }
+
+
+        // Gọi hàm fetch khi trang được tải
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchUsers();
+            fetchJobs();
+            // Fetch các dữ liệu khác tương tự
+        });
+        }
+
+        // TODO: Viết code để fetch dữ liệu từ API Spring Boot và điền vào các bảng
+        // Ví dụ: fetch('/api/admin/users').then(...)
+    </script>
+</body>
+</html>
