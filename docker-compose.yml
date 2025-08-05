@@ -1,31 +1,30 @@
 version: '3.8'
 
 services:
-  # Dịch vụ Database MySQL
   jobjet-db:
     image: mysql:8.0
     container_name: jobjet-db
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: 221105  # Đổi mật khẩu này
+      MYSQL_ROOT_PASSWORD: 123456  
       MYSQL_DATABASE: jobjet_db
     volumes:
       - mysql_data:/var/lib/mysql
 
-  # Dịch vụ Backend Spring Boot
   backend:
     container_name: jobjet-backend
+    restart: on-failure
     build:
-      context: ./backend-springboot  # Trỏ đến thư mục chứa Dockerfile
+      context: ./backend-springboot
     ports:
       - "8080:8080"
     depends_on:
       - jobjet-db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://jobjet-db:3306/jobjet_db?useSSL=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://jobjet-db:3306/jobjet_db?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 221105 # Dùng lại mật khẩu ở trên
+      SPRING_DATASOURCE_PASSWORD: 123456
 
 volumes:
   mysql_data:
