@@ -233,27 +233,7 @@
 
     <script>
         // JavaScript để xử lý chuyển đổi giữa các view và active link
-        function showView(viewId) {
-            // Ẩn tất cả các view
-            document.querySelectorAll('.view-content').forEach(view => {
-                view.classList.add('hidden');
-            });
-
-            // Hiển thị view được chọn
-            const activeView = document.getElementById(viewId);
-            if (activeView) {
-                activeView.classList.remove('hidden');
-            }
-
-            // Cập nhật trạng thái active cho sidebar
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.classList.remove('sidebar-link-active');
-                if (link.getAttribute('href') === '#' + viewId) {
-                    link.classList.add('sidebar-link-active');
-                }
-            });
-
-            const API_BASE_URL = 'http://localhost:8080/api/admin'; // Thay đổi nếu cần
+        const API_BASE_URL = 'http://localhost:8080/api/admin'; // Thay đổi nếu cần
 
         // Lấy dữ liệu người dùng
         function fetchUsers() {
@@ -304,13 +284,32 @@
                 .catch(error => console.error('Lỗi khi tải danh sách việc làm:', error));
         }
 
-
         // Gọi hàm fetch khi trang được tải
         document.addEventListener('DOMContentLoaded', () => {
             fetchUsers();
             fetchJobs();
             // Fetch các dữ liệu khác tương tự
         });
+
+        function showView(viewId) {
+            // Ẩn tất cả các view
+            document.querySelectorAll('.view-content').forEach(view => {
+                view.classList.add('hidden');
+            });
+
+            // Hiển thị view được chọn
+            const activeView = document.getElementById(viewId);
+            if (activeView) {
+                activeView.classList.remove('hidden');
+            }
+
+            // Cập nhật trạng thái active cho sidebar
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('sidebar-link-active');
+                if (link.getAttribute('href') === '#' + viewId) {
+                    link.classList.add('sidebar-link-active');
+                }
+            });
         }
 
         // TODO: Viết code để fetch dữ liệu từ API Spring Boot và điền vào các bảng
